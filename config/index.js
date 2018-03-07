@@ -6,6 +6,7 @@ module.exports = {
     entry: {
       lib: './src/index.js',
     },
+    ssr: true, // use server-side render
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),

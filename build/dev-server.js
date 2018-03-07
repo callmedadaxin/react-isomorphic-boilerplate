@@ -14,6 +14,7 @@ const views = require('koa-views')
 const static = require('koa-static')
 const app = require('../server/app')
 const fs = require('fs')
+const ssrMiddleWare = require('../server/middleware/server-render')
 
 const port = process.env.PORT || config.dev.port
 
@@ -43,14 +44,7 @@ app.use(convert(devMiddleware(compiler, {
   noInfo: true
 })))
 app.use(convert(hotMiddleware(compiler)))
-app.use(async ctx => {
-  const data = 'ssr'
-
-  await ctx.render('index', {
-    title: 'demo2',
-    root: 'sdfsdf'
-  })
-})
+app.use(ssrMiddleWare)
 
 // proxy api requests
 // Object.keys(proxyTable).forEach(function (context) {
