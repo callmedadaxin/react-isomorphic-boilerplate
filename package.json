@@ -1,0 +1,52 @@
+{
+  "scripts": {
+    "start": "nodemon build/dev-server.js"
+  },
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-logger": "^3.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^4.0.2",
+    "koa-views": "^6.1.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "add-asset-html-webpack-plugin": "^2.1.3",
+    "asset-require-hook": "^1.2.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "base": "^2.0.1",
+    "css-modules-require-hook": "^4.2.3",
+    "ejs": "^2.5.7",
+    "eventsource-polyfill": "^0.9.6",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.0.6",
+    "koa-convert": "^1.2.0",
+    "koa-webpack-dev-middleware": "^2.0.2",
+    "koa-webpack-hot-middleware": "^1.0.3",
+    "koa-webpack-middleware": "^1.0.7",
+    "node-sass": "^4.7.2",
+    "opn": "^5.2.0",
+    "portfinder": "^1.0.13",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "react-hot-loader": "^4.0.0",
+    "webpack": "^3.10.0",
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-koa-dev-middleware": "^0.1.3",
+    "webpack-koa2-middleware": "^2.1.0",
+    "webpack-merge": "^4.1.2"
+  }
+}
