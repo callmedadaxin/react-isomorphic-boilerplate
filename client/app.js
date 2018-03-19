@@ -4,10 +4,6 @@ import { renderRoutes } from 'react-router-config'
 import routes from './routes'
 
 export default class App extends Component {
-  componentWillReceiveProps = (nextProps) => {
-    console.log(nextProps)
-  }
-  
   render() {
     const { data } = this.props
     return (
