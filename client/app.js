@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import Home from './components/home'
-import About from './components/about'
-import User from '@/container/user'
-import {
-  Route, Link
-} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
+import routes from './routes'
 
 export default class App extends Component {
+  componentWillReceiveProps = (nextProps) => {
+    console.log(nextProps)
+  }
+  
   render() {
     const { data } = this.props
     return (
@@ -16,12 +17,10 @@ export default class App extends Component {
           <li><Link to="/about">About</Link></li>
           <li><Link to="/user">Users</Link></li>
         </ul>
-
-        <hr />
-
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/user" component={User} />
+        <hr/>
+        {
+          renderRoutes(routes)
+        }
       </div>
     )
   }

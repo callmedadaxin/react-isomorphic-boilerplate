@@ -14,9 +14,8 @@ import UserComp from '@/components/user'
 class UserContainer extends Component {
   render() {
     const { actions, dispatch, userList } = this.props
-    console.log(userList)
     return (
-      <UserComp {...this.props}/>
+      <UserComp userList={userList}/>
     )
   }
 }

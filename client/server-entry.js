@@ -1,6 +1,5 @@
 import React from 'react'
 import { StaticRouter } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
 
 import App from './App'
@@ -13,7 +12,7 @@ export default async (location, context, store) => {
   return (
     <Provider store={store}>
       <StaticRouter location={location} context={context}>
-        {renderRoutes(routes)}
+        <App />
       </StaticRouter>
     </Provider>
   )
