@@ -11,25 +11,13 @@ import UserComp from '@/components/user'
 @provideHooks({
   fetch: ({ dispatch, params }) => dispatch(getUserList())
 })
-class UserContainer extends Component {
+@connect(state => state.users)
+export default class UserContainer extends Component {
   render() {
-    const { actions, dispatch, userList } = this.props
+    const { userList } = this.props
     return (
       <UserComp userList={userList}/>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return state.users
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators({
-      getUserList
-    }, dispatch),
-    dispatch
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserContainer)

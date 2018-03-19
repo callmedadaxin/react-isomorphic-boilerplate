@@ -14,20 +14,10 @@ const store = createStore(initialState)
 
 const AutoFetchWhenRouterChange = WrappedComponent =>
   class extends Component {
-    componentWillMount () {
-      triggerFetch(this.props.location.pathname, store)
-    }
-    
     componentWillReceiveProps(nextProps) {
       const navigated = nextProps.location !== this.props.location
       if (navigated) {
-        // Don't fetch data for initial route, server has already done the work:
-        if (window.REDUX_STATE) {
-          // Delete initial data so that subsequent data fetches can occur:
-          delete window.REDUX_STATE;
-        } else {
-          triggerFetch(nextProps.location.pathname, store)
-        }
+        triggerFetch(nextProps.location.pathname, store)
       }
     }
     render() {
