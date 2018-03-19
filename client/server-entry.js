@@ -1,10 +1,20 @@
 import React from 'react'
-import App from './App'
 import { StaticRouter } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
+import { Provider } from 'react-redux'
 
-export default (location, context) => <StaticRouter
-  location={location}
-  context={context}
->
-  <App />
-</StaticRouter>
+import App from './App'
+import routes from './routes'
+import triggerFetch from './common/triggerFetch'
+
+export default async (location, context, store) => {
+  await triggerFetch(location, store)
+
+  return (
+    <Provider store={store}>
+      <StaticRouter location={location} context={context}>
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </Provider>
+  )
+}

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import Home from './components/home'
 import About from './components/about'
-import User from './components/User'
+import User from '@/container/user'
 import {
-  Route,
-  Link
+  Route, Link
 } from 'react-router-dom'
 
 export default class App extends Component {
