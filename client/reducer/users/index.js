@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux'
+import { reducerCreator } from 'redux-data-fetch-middleware'
 import {
-  GET_USERS_SUCCESS
+  getUserListActions
 } from '@/actions/users'
+
+const [GET_USER_LIST, GET_USER_LIST_SUCCESS, GET_USER_LIST_FAILED] = getUserListActions
+const fetchedUserList = reducerCreator(getUserListActions)
 
 const initUsers = {
   list: []
@@ -9,7 +13,7 @@ const initUsers = {
 
 const userList = (state = initUsers, action) => {
   switch (action.type) {
-    case GET_USERS_SUCCESS:
+    case GET_USER_LIST_SUCCESS:
       return {
         ...state,
         list: action.payload
@@ -20,5 +24,5 @@ const userList = (state = initUsers, action) => {
 }
 
 export default combineReducers({
-  userList
+  userList: fetchedUserList(userList)
 })

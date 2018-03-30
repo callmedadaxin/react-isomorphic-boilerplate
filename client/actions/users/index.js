@@ -1,19 +1,10 @@
-import { post } from '@/common/fetch'
+import { actionCreator } from 'redux-data-fetch-middleware'
 
-export const GET_USERS_SUCCESS = Symbol('GET_USERS_SUCCESS')
+export const getUserListActions = actionCreator('GET_USER_LIST')
 
-const getUserSuccess = payload => ({
-  type: GET_USERS_SUCCESS,
-  payload
+export const getUserList = (params) => ({
+  url: '/api/user',
+  params: params,
+  handleResult: res => res.list,
+  types: getUserListActions
 })
-
-export const getUserList = (params) => dispatch => {
-  return post('/api/user')
-    .then(r => r.json())
-    .then(r => {
-      dispatch(getUserSuccess(r.list))
-    })
-    .catch(e => {
-      console.log(e)
-    })
-}
