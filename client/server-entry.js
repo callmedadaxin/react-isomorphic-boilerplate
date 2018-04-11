@@ -2,7 +2,7 @@ import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import App from './App'
+import App from './app'
 import routes from './routes'
 import triggerFetch from './common/triggerFetch'
 
