@@ -19,3 +19,23 @@ npm run build
 // start serve
 npm run serve
 ```
+
+## Isomorphic
+Write fetch hooks in containers
+
+It will auto fetch and update the states both on the client and server side
+
+```
+@provideHooks({
+  fetch: ({ dispatch, params }) => dispatch(getUserList())
+})
+@connect(state => state.users)
+export default class UserContainer extends Component {
+  render() {
+    const { userList } = this.props
+    return (
+      <UserComp userList={userList}/>
+    )
+  }
+}
+```
