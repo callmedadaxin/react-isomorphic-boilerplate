@@ -9,7 +9,6 @@ export default async (ctx, next) => {
   const context = {}
   const store = createStore()
   const App = await entry(ctx.url, context, store)
-
   if (context.url) {
     return
   }

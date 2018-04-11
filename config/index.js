@@ -4,11 +4,11 @@ var path = require('path')
 module.exports = {
   build: {
     entry: {
-      lib: './src/index.js',
+      app: './client/client-entry.js',
     },
     ssr: true, // use server-side render
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: 'index.html',
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -19,14 +19,18 @@ module.exports = {
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
     productionGzipExtensions: ['js', 'css'],
-
-    // 是否开启 css Module
-    cssModules: true,
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
+  },
+  server: {
+    entry: {
+      app: './server/index.js'
+    },
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsSubDirectory: 'server',
   },
   dev: {
     entry: {
@@ -34,16 +38,14 @@ module.exports = {
         './client/client-entry.js',
         'webpack-hot-middleware/client?noInfo=true&reload=true'
       ]
-      // index: path.resolve(__dirname, '../client/client-entry.js')
     },
     env: require('./dev.env'),
-    port: 8089,
+    port: 8080,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {},
     // 是否开启 css Module
-    cssModules: false,
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)

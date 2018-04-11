@@ -4,9 +4,6 @@ const config = require('../config')
 const isProd = process.env.NODE_ENV === 'production'
 
 const resolve = dir => path.join(__dirname, '..', dir)
-const alias = {
-  '@': resolve('client')
-}
 
 module.exports = {
   entry: isProd ? config.build.entry : config.dev.entry,
@@ -22,7 +19,8 @@ module.exports = {
       resolve('node_modules')
     ],
     alias: {
-      ...alias
+      '@': resolve('client'),
+      'server': resolve('server')
     }
   },
   module: {

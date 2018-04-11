@@ -9,6 +9,10 @@ exports.assetsPath = function (_path) {
     : config.dev.assetsSubDirectory
   return path.posix.join(assetsSubDirectory, _path)
 }
+exports.serverPath = function (_path) {
+  var assetsSubDirectory = config.server.assetsSubDirectory
+  return path.posix.join(assetsSubDirectory, _path)
+}
 
 exports.getDllPath = function (p) {
   const basePath = path.resolve(__dirname, p)
@@ -23,10 +27,6 @@ exports.cssLoaders = function (options) {
   var cssLoader = {
     loader: 'css-loader',
     options: {
-      // modules: prod?config.build.cssModules:config.dev.cssModules,// 开启 css modules 功能
-      // importLoaders: 1,
-      // localIdentName: '[local]--[hash:base64:8]',
-      // minimize: prod,
       sourceMap: options.sourceMap
     }
   }

@@ -1,0 +1,94 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /usr/local/bin:/usr/local/bin:/Users/wangxiaoxin/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mongodb/mongodb-osx-x86_64-3.4.1/bin/
+
+Yarn version: 
+  0.20.3
+
+Node version: 
+  9.2.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "scripts": {
+      "start": "node build/dev-server.js",
+      "build:client": "node build/build-client",
+      "build:server": "node build/build-server"
+    },
+    "dependencies": {
+      "isomorphic-fetch": "^2.2.1",
+      "koa": "^2.5.0",
+      "koa-bodyparser": "^4.2.0",
+      "koa-convert": "^1.2.0",
+      "koa-logger": "^3.1.0",
+      "koa-router": "^7.4.0",
+      "koa-static": "^4.0.2",
+      "koa-views": "^6.1.4",
+      "react": "^16.2.0",
+      "react-dom": "^16.2.0",
+      "react-redux": "^5.0.7",
+      "react-router-config": "^1.0.0-beta.4",
+      "react-router-dom": "^4.2.2",
+      "redial": "^0.5.0",
+      "redux": "^3.7.2",
+      "redux-data-fetch-middleware": "^1.0.0",
+      "redux-thunk": "^2.2.0"
+    },
+    "devDependencies": {
+      "add-asset-html-webpack-plugin": "^2.1.3",
+      "asset-require-hook": "^1.2.0",
+      "babel-loader": "^7.1.4",
+      "babel-plugin-add-module-exports": "^0.2.1",
+      "babel-plugin-module-alias": "^1.6.0",
+      "babel-plugin-transform-decorators-legacy": "^1.3.4",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-plugin-transform-runtime": "^6.23.0",
+      "babel-polyfill": "^6.26.0",
+      "babel-preset-es2015": "^6.24.1",
+      "babel-preset-react": "^6.24.1",
+      "babel-preset-stage-0": "^6.24.1",
+      "babel-register": "^6.26.0",
+      "base": "^2.0.1",
+      "css-modules-require-hook": "^4.2.3",
+      "ejs": "^2.5.7",
+      "eventsource-polyfill": "^0.9.6",
+      "extract-text-webpack-plugin": "^3.0.2",
+      "friendly-errors-webpack-plugin": "^1.6.1",
+      "html-loader": "^0.5.5",
+      "html-webpack-plugin": "^3.0.6",
+      "koa-convert": "^1.2.0",
+      "koa-webpack-dev-middleware": "^2.0.2",
+      "koa-webpack-hot-middleware": "^1.0.3",
+      "koa-webpack-middleware": "^1.0.7",
+      "node-sass": "^4.7.2",
+      "opn": "^5.2.0",
+      "optimize-css-assets-webpack-plugin": "^4.0.0",
+      "ora": "^2.0.0",
+      "portfinder": "^1.0.13",
+      "progress-bar-webpack-plugin": "^1.11.0",
+      "react-hot-loader": "^4.0.0",
+      "shelljs": "^0.8.1",
+      "webpack": "^3.10.0",
+      "webpack-hot-middleware": "^2.21.2",
+      "webpack-koa-dev-middleware": "^0.1.3",
+      "webpack-koa2-middleware": "^2.1.0",
+      "webpack-merge": "^4.1.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: connect ETIMEDOUT 104.16.59.173:443
+      at Object._errnoException (util.js:1031:13)
+      at _exceptionWithHostPort (util.js:1052:20)
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1195:14)
