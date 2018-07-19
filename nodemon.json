@@ -1,0 +1,6 @@
+{
+  "ignore": ["./client/**", "./build/dev-server.js"],
+  "watch": [
+    "./server/**"
+  ]
+}

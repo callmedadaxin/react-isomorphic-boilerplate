@@ -1,5 +1,5 @@
 import React from 'react'
-import './user.scss'
+import styles from './user.scss'
 
 const User = (props) => {
   const { userList } = props

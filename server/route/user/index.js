@@ -10,6 +10,9 @@ router.post('/', async (ctx, next) => {
     list: [{
       name: 'wwx',
       age: 18
+    }, {
+      name: 'ww1',
+      age: 20
     }]
   }
 })
