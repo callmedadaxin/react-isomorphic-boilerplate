@@ -15,6 +15,7 @@ const getExternals = () => {
 }
 
 module.exports = {
+  mode: 'production',
   entry: config.server.entry,
   output: {
     path: config.build.assetsRoot,

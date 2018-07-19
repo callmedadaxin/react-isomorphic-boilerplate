@@ -1,15 +1,17 @@
-var path = require('path')
-var utils = require('./utils')
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var env = config.build.env
+const path = require('path')
+const utils = require('./utils')
+const webpack = require('webpack')
+const config = require('../config')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// 替代extract-text-webpack-plugin
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 
-var webpackConfig = merge(baseWebpackConfig, {
+const webpackConfig = merge(baseWebpackConfig, {
+  mode: 'production',
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -22,36 +24,51 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].js'),
     chunkFilename: utils.assetsPath('js/[id].js')
   },
+  optimization: {
+    // 替代之前的common chunck
+    runtimeChunk: {
+      name: 'manifest'
+    },
+    splitChunks: {
+      chunks: 'all', // 显示块的范围，initial(初始块)、async(按需加载块)、all(全部块)，默认为all
+      minSize: 1024 * 20, // 在压缩前的最小模块大小，默认为0
+      minChunks: 1, // 被引用次数，默认为1
+      maxAsyncRequests: 5, // 最大的按需(异步)加载次数，默认为1
+      maxInitialRequests: 3, // 最大的初始化加载次数，默认为1
+      // 缓存组
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.scss|css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    },
+    minimizer: [
+      // 替代之前的压缩方式
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: config.build.productionSourceMap,
+        uglifyOptions: {
+          warnings: false
+        }
+      }),
+      new OptimizeCSSAssetsPlugin({
+        cssProcessorOptions: {
+          safe: true
+        }
+      })
+    ]
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': env
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_debugger: true,
-        drop_console: true
-      },
-      sourceMap: true
-    }),
-    // extract css into its own file
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
       filename: utils.assetsPath('css/[name].css'),
-      allChunks: true
+      chunkFilename: utils.assetsPath('css/[contenthash:12].css')
     }),
-    // Compress extracted CSS. We are using this plugin so that possible
-    // duplicated CSS from different components can be deduped.
-    // new OptimizeCSSPlugin({
-    //   cssProcessorOptions: {
-    //     safe: true
-    //   }
-    // }),
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   manifest: require('../dll/manifest.json'),
-    // }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -66,28 +83,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
-    }),
-    // // split vendor js into its own file
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-        // any required modules inside node_modules are extracted to vendor
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
-        )
-      }
-    }),
-    // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      chunks: ['vendor']
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin()
+    })
   ]
 })
 

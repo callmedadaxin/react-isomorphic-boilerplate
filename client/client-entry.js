@@ -12,6 +12,7 @@ import triggerFetch from './common/triggerFetch'
 const initialState = window.REDUX_STATE
 const store = createStore(initialState)
 
+// auto trigger fetch action when route change
 const AutoFetchWhenRouterChange = WrappedComponent =>
   class extends Component {
     componentWillReceiveProps(nextProps) {
@@ -29,7 +30,7 @@ const routes = [{
   component: AutoFetchWhenRouterChange(App)
 }]
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
       {renderRoutes(routes)}
