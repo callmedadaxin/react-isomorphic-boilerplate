@@ -2,7 +2,6 @@
 require('css-modules-require-hook')({
   extensions: ['.scss'],
   preprocessCss: (data, filename) => {
-    console.log(data, filename)
     return require('node-sass').renderSync({
       data,
       file: filename

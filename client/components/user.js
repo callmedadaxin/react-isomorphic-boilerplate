@@ -1,11 +1,12 @@
 import React from 'react'
+import './user.scss'
 
 const User = (props) => {
   const { userList } = props
 
   return (
     <div>
-      <h2>User</h2>
+      <h2 className="red">User</h2>
       <ul>
         {
           userList.list.map(item => (

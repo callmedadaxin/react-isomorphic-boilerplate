@@ -74,11 +74,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           warnings: false
         }
       }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {
-          safe: true
-        }
-      })
+      new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
