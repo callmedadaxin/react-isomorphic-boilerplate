@@ -9,7 +9,8 @@ module.exports = {
   entry: isProd ? config.build.entry : config.dev.entry,
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
+    filename: "[name].[hash].js",
+    chunkFilename: "[name].[chunkhash].js",
     publicPath: isProd ? config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   resolve: {

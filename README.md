@@ -4,7 +4,9 @@ a boilerplate for react server-side rendering app
 ## Features
 - [x] React + Redux + React-Router
 - [x] Sever side render with Koa
-- [ ] Webpack 4+
+- [x] Webpack 4+
+- [ ] support sass
+- [ ] support cssmodules with babel-plugin-react-css-modules
 - [ ] Build with dll plugin
 
 ## Usage

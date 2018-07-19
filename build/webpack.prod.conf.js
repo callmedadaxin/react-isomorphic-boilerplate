@@ -21,8 +21,8 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].js'),
-    chunkFilename: utils.assetsPath('js/[id].js')
+    filename: utils.assetsPath('js/[name].[hash].js'),
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].js')
   },
   optimization: {
     // 替代之前的common chunck
@@ -37,6 +37,25 @@ const webpackConfig = merge(baseWebpackConfig, {
       maxInitialRequests: 3, // 最大的初始化加载次数，默认为1
       // 缓存组
       cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          priority: -10,
+          reuseExistingChunk: false,
+          test: /node_modules\/(.*)\.js/
+        },
+        commons: {
+          chunks: "async",
+          name: 'commons-async',
+          /**
+           * minSize 默认为 30000
+           * 想要使代码拆分真的按照我们的设置来
+           * 需要减小 minSize
+           */
+          minSize: 0,
+          // 至少为两个 chunks 的公用代码
+          minChunks: 2
+        },
         styles: {
           name: 'styles',
           test: /\.scss|css$/,
