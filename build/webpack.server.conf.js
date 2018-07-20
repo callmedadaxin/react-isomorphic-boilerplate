@@ -2,6 +2,9 @@ const fs = require('fs')
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
+const merge = require('webpack-merge')
+const baseWebpackConfig = require('./webpack.base.conf')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const resolve = dir => path.join(__dirname, '..', dir)
 const getExternals = () => {
@@ -14,12 +17,18 @@ const getExternals = () => {
     }, {})
 }
 
-module.exports = {
+module.exports = merge(baseWebpackConfig, {
   mode: 'production',
   entry: config.server.entry,
   output: {
     path: config.build.assetsRoot,
     filename: utils.serverPath('[name].js')
+  },
+  module: {
+    rules: utils.styleLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true
+    })
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -39,13 +48,12 @@ module.exports = {
     __dirname: true
   },
   externals: getExternals(),
-  module: {
-    rules: [
-      {
-        test: /\.(js)$/,
-        loader: 'babel-loader',
-        exclude: [resolve('node_modules')]
-      }
-    ]
-  }
-}
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: utils.assetsPath('css/[name].css'),
+      chunkFilename: utils.assetsPath('css/[contenthash:12].css')
+    }),
+  ]
+})
