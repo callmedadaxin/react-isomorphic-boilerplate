@@ -1,7 +1,7 @@
 import App from '@/app'
 import Home from '@/components/home'
 import About from '@/components/about'
-import User from '@/container/user'
+import loadableComp from '@/common/loadableComp'
 
 export default [{
   path: '/',
@@ -12,5 +12,5 @@ export default [{
   component: About
 }, {
   path: '/user',
-  component: User
+  component: loadableComp('user')
 }]
