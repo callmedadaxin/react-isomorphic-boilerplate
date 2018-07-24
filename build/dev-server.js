@@ -14,6 +14,7 @@ const views = require('koa-views')
 const static = require('koa-static')
 const app = require('../server/app')
 const fs = require('fs')
+const Loadable = require('react-loadable')
 const ssrMiddleWare = require('../server/middleware/server-render')
 
 const port = process.env.PORT || config.dev.port
@@ -59,6 +60,8 @@ const uri = 'http://localhost:' + port
 
 console.log('> Starting dev server...')
 
-app.listen(port, () => {
-  console.log('> Listening at ' + uri + '\n')
+Loadable.preloadAll().then(_ => {
+  app.listen(port, () => {
+    console.log('> Listening at ' + uri + '\n')
+  })
 })

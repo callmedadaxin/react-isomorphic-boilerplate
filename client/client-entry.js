@@ -5,6 +5,7 @@ import App from './app';
 import { BrowserRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
+import Loadable from 'react-loadable'
 
 import createStore from './store'
 import triggerFetch from './common/triggerFetch'
@@ -30,11 +31,14 @@ const routes = [{
   component: AutoFetchWhenRouterChange(App)
 }]
 
-ReactDOM.hydrate(
-  <Provider store={store}>
-    <BrowserRouter>
-      {renderRoutes(routes)}
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-)
+Loadable.preloadReady().then(() => {
+  ReactDOM.hydrate(
+    <Provider store={store}>
+      <BrowserRouter>
+        {renderRoutes(routes)}
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
+  )
+})
+

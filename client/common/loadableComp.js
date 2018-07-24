@@ -6,6 +6,7 @@ export default (componentName) => {
     loader: () => {
       // return 
       // import(`../reducers/${key}/index`)
+      console.log(componentName)
       return import(`../container/${componentName}.js`)
     },
     loading: Loading,
