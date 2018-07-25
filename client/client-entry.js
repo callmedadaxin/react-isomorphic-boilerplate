@@ -27,18 +27,29 @@ const AutoFetchWhenRouterChange = WrappedComponent =>
     }
   }
 
-const routes = [{
-  component: AutoFetchWhenRouterChange(App)
-}]
+const render = (App) => {
+  const routes = [{
+    component: AutoFetchWhenRouterChange(App)
+  }]
 
-Loadable.preloadReady().then(() => {
-  ReactDOM.hydrate(
-    <Provider store={store}>
-      <BrowserRouter>
-        {renderRoutes(routes)}
-      </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
-  )
-})
+  Loadable.preloadReady().then(() => {
+    ReactDOM.hydrate(
+      <Provider store={store}>
+        <BrowserRouter>
+          {renderRoutes(routes)}
+        </BrowserRouter>
+      </Provider>,
+      document.getElementById('root')
+    )
+  })
+}
+
+render(App);
+
+if(module.hot){
+  module.hot.accept() //接受模块更新的事件，同时阻止这个事件继续冒泡
+}
+
+
+
 

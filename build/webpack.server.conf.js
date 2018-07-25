@@ -16,12 +16,9 @@ const getExternals = () => {
       return externals
     }, {})
 }
-console.log(utils.styleLoaders({
-  sourceMap: config.build.productionSourceMap,
-  extract: true
-}))
+
 module.exports = merge(baseWebpackConfig, {
-  mode: 'production',
+  mode: 'development',
   entry: config.server.entry,
   output: {
     path: config.build.assetsRoot,

@@ -3,21 +3,28 @@
     [
       "env"
     ],
-    "react"
+    "react",
+    "stage-2"
   ],
   "plugins": [
     "transform-runtime",
     "transform-decorators-legacy",
     "add-module-exports",
     "syntax-dynamic-import",
-    "dynamic-import-node",
-    "react-hot-loader/babel",
     "react-loadable/babel",
+    "react-hot-loader/babel",
     [
       "transform-object-rest-spread",
       {
         "useBuiltIns": true
       }
     ]
-  ]
+  ],
+  "env": {
+    "ssr": {
+      "plugins": [
+        "dynamic-import-node"
+      ]
+    }
+  }
 }

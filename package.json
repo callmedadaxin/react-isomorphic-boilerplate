@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "dev:client": "node build/dev-server.js",
+    "dev:client": "cross-env BABEL_ENV=dev node build/dev-server.js",
     "dev:server-build": "npm run build:client && nodemon build/dev-ssr.js",
     "dev:server": "nodemon build/dev-ssr.js",
     "build:client": "node build/build-client",
-    "build:server": "node build/build-server",
+    "build:server": "cross-env BABEL_ENV=ssr node build/build-server",
     "build": "npm run build:client && npm run build:server",
     "serve": "pm2 start dist/server/app.js"
   },
@@ -46,6 +46,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "base": "^2.0.1",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "css-modules-require-hook": "^4.2.3",
     "ejs": "^2.5.7",

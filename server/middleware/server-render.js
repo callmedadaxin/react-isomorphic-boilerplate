@@ -5,16 +5,16 @@ import entry from '@/server-entry'
 import createStore from '@/store'
 import config from '../../config/index'
 
-const stats = require('../../dist/react-loadable.json')
 const path = require('path')
+const fs = require('fs')
 const { renderToString } = ReactServerRender
-// const statsPath = path.join(config.build.assetsRoot, 'react-loadable.json')
+const statsPath = path.join(config.build.assetsRoot, 'react-loadable.json')
 const staticPath = config.build.assetsSubDirectory
-// const stats = require(path.relative(__dirname, statsPath))
+const statsStr = fs.readFileSync(statsPath, 'utf8')
+const stats = JSON.parse(statsStr)
 
 function generateBundleScripts (modules) {
   const bundles = getBundles(stats, modules)
-  console.log(stats, staticPath)
   return bundles
     .filter(bundle => bundle && bundle.file.endsWith('.js'))
     .map(bundle => {

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-)
-
-export default About
+export default class About extends PureComponent {
+  render() {
+    return (
+      <div>
+        About111
+      </div>
+    )
+  }
+}

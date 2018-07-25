@@ -16,6 +16,8 @@ const app = require('../server/app')
 const fs = require('fs')
 // const Loadable = require('react-loadable')
 // const ssrMiddleWare = require('../server/middleware/server-render')
+//for .babelrc
+process.env.BABEL_ENV = "dev"
 
 const port = process.env.PORT || config.dev.port
 
