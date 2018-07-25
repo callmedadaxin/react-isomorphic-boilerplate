@@ -5,7 +5,7 @@ export default class About extends PureComponent {
   render() {
     return (
       <div>
-        About111
+        About1
       </div>
     )
   }
