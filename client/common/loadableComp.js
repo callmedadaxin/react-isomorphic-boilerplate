@@ -3,12 +3,8 @@ import Loading from './loading'
 
 export default (componentName) => {
   return Loadable({
-    loader: () => {
-      // return 
-      // import(`../reducers/${key}/index`)
-      console.log(componentName)
-      return import(`../container/${componentName}.js`)
-    },
+    loader: () => import(`../container/${componentName}.js`)
+      .then(object => object.default),
     loading: Loading,
   })
 }

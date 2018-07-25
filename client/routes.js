@@ -1,4 +1,3 @@
-import App from '@/app'
 import Home from '@/components/home'
 import About from '@/components/about'
 import loadableComp from '@/common/loadableComp'

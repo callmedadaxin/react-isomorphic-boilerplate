@@ -1,6 +1,7 @@
 import views from 'koa-views'
 import serve from 'koa-static'
 import path from 'path'
+import Loadable from 'react-loadable'
 
 import config from './config'
 import app from './app'
@@ -18,6 +19,8 @@ const { port } = config
 
 const uri = 'http://localhost:' + port
 
-app.listen(port, () => {
-  console.log('> Listening at ' + uri + '\n')
+Loadable.preloadAll().then(() => {
+  app.listen(port, () => {
+    console.log('> Listening at ' + uri + '\n')
+  })
 })

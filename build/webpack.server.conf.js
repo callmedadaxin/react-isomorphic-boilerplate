@@ -16,7 +16,10 @@ const getExternals = () => {
       return externals
     }, {})
 }
-
+console.log(utils.styleLoaders({
+  sourceMap: config.build.productionSourceMap,
+  extract: true
+}))
 module.exports = merge(baseWebpackConfig, {
   mode: 'production',
   entry: config.server.entry,
@@ -25,10 +28,16 @@ module.exports = merge(baseWebpackConfig, {
     filename: utils.serverPath('[name].js')
   },
   module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.build.productionSourceMap,
-      extract: true
-    })
+    rules: [
+      ...utils.styleLoaders({
+        sourceMap: config.build.productionSourceMap,
+        extract: true
+      }),
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],

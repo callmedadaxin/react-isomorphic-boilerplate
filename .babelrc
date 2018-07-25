@@ -10,15 +10,14 @@
     "transform-decorators-legacy",
     "add-module-exports",
     "syntax-dynamic-import",
+    "dynamic-import-node",
     "react-hot-loader/babel",
+    "react-loadable/babel",
     [
       "transform-object-rest-spread",
       {
         "useBuiltIns": true
       }
-    ],
-    ["import-inspector", {
-      "serverSideRequirePath": true
-    }]
+    ]
   ]
 }

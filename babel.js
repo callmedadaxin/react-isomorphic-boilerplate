@@ -11,7 +11,6 @@ const retAlias = Object.keys(alias).map(key => {
   }
 })
 
-console.log(babelrc)
 const getBabelConfig = () => {
   try {
     const config = JSON.parse(babelrc.toString())
@@ -20,12 +19,24 @@ const getBabelConfig = () => {
       retAlias
     ],)
     config.plugins.push("dynamic-import-node")
-    config.ignore = /node_modules\/(?!koa-webpack-dev-middleware|koa-webpack-hot-middleware)/
     return config
   } catch (error) {
     console.log(error)
     return {}
   }
 }
-// Javascript require hook
 require('babel-register')(getBabelConfig())
+// Javascript require hook
+// require('babel-register')({
+//   presets: ['env', 'react', 'stage-1'],
+//   plugins: [
+//     "transform-decorators-legacy",
+//     "react-loadable/babel",
+//     'syntax-dynamic-import',
+//     "dynamic-import-node",
+//     [
+//       "module-alias",
+//       retAlias
+//     ]
+//   ]
+// })
