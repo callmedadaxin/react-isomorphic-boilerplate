@@ -1,4 +1,3 @@
-import ReactServerRender from 'react-dom/server'
 import { getBundles } from 'react-loadable/webpack'
 
 import entry from '@/server-entry'
@@ -7,7 +6,6 @@ import config from '../../config/index'
 
 const path = require('path')
 const fs = require('fs')
-const { renderToString } = ReactServerRender
 const statsPath = path.join(config.build.assetsRoot, 'react-loadable.json')
 const staticPath = config.build.assetsSubDirectory
 const statsStr = fs.readFileSync(statsPath, 'utf8')
@@ -18,10 +16,9 @@ function generateBundleScripts (modules) {
   return bundles
     .filter(bundle => bundle && bundle.file.endsWith('.js'))
     .map(bundle => {
-      return `<script type="text/javascript" src="/${staticPath}${
-        bundle.file
-      }"></script>\n`;
-    });
+      return `<script type="text/javascript" src="${bundle.publicPath}"></script>`
+    })
+    .join('\n')
 }
 
 export default async (ctx, next) => {
@@ -32,13 +29,11 @@ export default async (ctx, next) => {
   if (context.url) {
     return
   }
-  console.log(app.modules)
-  console.log(generateBundleScripts(app.modules))
-
   await ctx.render('index', {
     title: 'title',
-    root: renderToString(app.html),
-    state: store.getState()
+    root: app.html,
+    state: store.getState(),
+    scripts: generateBundleScripts(app.modules)
   })
 
   next()

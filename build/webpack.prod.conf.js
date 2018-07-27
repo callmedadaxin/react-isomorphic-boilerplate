@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
-const { ReactLoadablePlugin } = require('react-loadable/webpack')
+const ReactLoadablePlugin = require('./loadablePlugin')
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -86,6 +86,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunkFilename: utils.assetsPath('css/[contenthash:12].css')
     }),
     new ReactLoadablePlugin({
+      loadPath: path.join(__dirname, '../client/common'),
       filename: path.join(config.build.assetsRoot, 'react-loadable.json'),
     }),
     // see https://github.com/ampedandwired/html-webpack-plugin

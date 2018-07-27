@@ -1,5 +1,6 @@
 import React from 'react'
 import { StaticRouter } from 'react-router-dom'
+import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import Loadable from 'react-loadable'
 
@@ -10,13 +11,16 @@ export default async (location, context, store, modules) => {
   await triggerFetch(location, store)
 
   return {
-    html: <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+    html: renderToString(<Loadable.Capture report={moduleName => {
+      console.log(moduleName)
+      modules.push(moduleName)
+    }}>
       <Provider store={store}>
         <StaticRouter location={location} context={context}>
           <App />
         </StaticRouter>
       </Provider>
-    </Loadable.Capture>,
+    </Loadable.Capture>),
     modules
   }
 }
