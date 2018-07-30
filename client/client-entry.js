@@ -36,8 +36,7 @@ const render = (App) => {
     ReactDOM.hydrate(
       <Provider store={store}>
         <BrowserRouter>
-          <App />
-          {/* {renderRoutes(routes)} */}
+          {renderRoutes(routes)}
         </BrowserRouter>
       </Provider>,
       document.getElementById('root')

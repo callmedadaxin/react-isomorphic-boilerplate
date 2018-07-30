@@ -53,7 +53,8 @@ app.use(async (ctx, next) => {
   await ctx.render('index', {
     title: 'title',
     root: '',
-    state: {}
+    state: {},
+    scripts: []
   })
   next()
 })
