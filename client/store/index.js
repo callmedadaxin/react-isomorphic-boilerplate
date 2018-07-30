@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 import createFetchMiddleware from 'redux-data-fetch-middleware'
 
 import reducer from '../reducer'
@@ -10,7 +10,13 @@ const reduxFetch = createFetchMiddleware(post, handleResponse)
 
 const middleWare = [thunk, reduxFetch]
 
-export default function (initialState) {
+const makeRootReducer = asyncReducers => {
+  return combineReducers({
+    ...asyncReducers
+  });
+};
+
+export default (initialState) => {
   const store = createStore(
     reducer,
     initialState,
@@ -27,3 +33,11 @@ export default function (initialState) {
 
   return store
 }
+
+export function registerReducer(store, reducers) {
+  !store.async && (store.async = [])
+  reducers.forEach(item => {
+    store.async[item.name] = item.reducer
+  })
+  store.replaceReducer(makeRootReducer(store.async))
+};

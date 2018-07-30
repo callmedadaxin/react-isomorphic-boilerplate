@@ -5,7 +5,7 @@ import routes from './routes'
 
 export default class App extends Component {
   render() {
-    const { data } = this.props
+    const { store } = this.props
     return (
       <div>
         <ul>
@@ -15,7 +15,7 @@ export default class App extends Component {
         </ul>
         <hr/>
         {
-          renderRoutes(routes)
+          renderRoutes(routes(store))
         }
       </div>
     )
