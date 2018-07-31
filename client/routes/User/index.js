@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
 import { connect } from "react-redux"
 import { provideHooks } from 'redial';
 import {
   getUserList
-} from '@/actions/users/index.js'
-import UserComp from '@/components/user'
+} from './actions'
+import UserComp from './components'
+
+// 将reducer也进行拆分
+export { default as reducer } from './reducers'
 
 @provideHooks({
-  fetch: ({ dispatch, params }) => dispatch(getUserList())
+  fetch: ({ dispatch, params }) => dispatch(getUserList(params))
 })
-@connect(state => state.users)
+@connect(state => state.user)
 export default class UserContainer extends Component {
   render() {
     const { userList } = this.props

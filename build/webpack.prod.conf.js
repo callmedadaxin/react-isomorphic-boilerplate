@@ -86,7 +86,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunkFilename: utils.assetsPath('css/[contenthash:12].css')
     }),
     new ReactLoadablePlugin({
-      loadPath: path.join(__dirname, '../client/common'),
+      loadPath: path.join(__dirname, '../client'),
       filename: path.join(config.build.assetsRoot, 'react-loadable.json'),
     }),
     // see https://github.com/ampedandwired/html-webpack-plugin

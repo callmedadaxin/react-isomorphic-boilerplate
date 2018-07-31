@@ -23,7 +23,7 @@ function generateBundleScripts (modules) {
 
 export default async (ctx, next) => {
   const context = {}
-  const store = createStore()
+  const store = createStore({})
   const modules = []
   const app = await entry(ctx.url, context, store, modules)
   if (context.url) {
@@ -32,8 +32,8 @@ export default async (ctx, next) => {
   await ctx.render('index', {
     title: 'title',
     root: app.html,
-    state: store.getState(),
-    scripts: generateBundleScripts(app.modules)
+    state: store.getState() || {},
+    scripts: generateBundleScripts(app.modules) || []
   })
 
   next()

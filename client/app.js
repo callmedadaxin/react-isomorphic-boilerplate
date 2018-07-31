@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
-import routes from './routes'
+import routes from './routes/index'
 
 export default class App extends Component {
   render() {
-    const { store } = this.props
     return (
       <div>
         <ul>
@@ -15,7 +14,7 @@ export default class App extends Component {
         </ul>
         <hr/>
         {
-          renderRoutes(routes(store))
+          renderRoutes(routes)
         }
       </div>
     )

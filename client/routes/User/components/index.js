@@ -1,7 +1,6 @@
 
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import styles from './user.scss'
+import './index.scss'
 
 export default class user extends PureComponent {
   render() {

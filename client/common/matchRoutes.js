@@ -1,14 +1,24 @@
 import { matchRoutes } from 'react-router-config';
 
 function getComponents(match) {
-  return match.map(v => v.route.component).reduce(async (result, component) => {
+  const reducers = []
+  const components = match.map(v => v.route).reduce(async (result, component) => {
+    console.log(component)
     if (component.preload) {
+      // loadable会自动给其注入preload方法
       const res = await component.preload();
-      const ret = [...(await result), component, ...[].concat(res)];
+      const { default: Component, reducer } = res
+      console.log(Component, reducer)
+      const ret = [...(await result), Component, ...[].concat(Component)];
+      reducers.push(reducer)
       return ret;
     }
     return [...(await result), component];
   }, []);
+  return {
+    reducers,
+    components
+  }
 }
 
 function getParams(match) {
@@ -23,9 +33,9 @@ function getParams(match) {
 const asyncMatchRoutes = async (routes, pathname) => {
   const match = matchRoutes(routes, pathname);
   const params = getParams(match);
-  const components = await getComponents(match);
+  const { components, reducers } = await getComponents(match);
 
-  return { components, match, params };
+  return { components, match, params, reducers };
 };
 
 export default asyncMatchRoutes;

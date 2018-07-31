@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { reducerCreator } from 'redux-data-fetch-middleware'
 import {
   getUserListActions
-} from '@/actions/users'
+} from '../actions'
 
 const [GET_USER_LIST, GET_USER_LIST_SUCCESS, GET_USER_LIST_FAILED] = getUserListActions
 const fetchedUserList = reducerCreator(getUserListActions)
@@ -23,6 +23,10 @@ const userList = (state = initUsers, action) => {
   }
 }
 
-export default combineReducers({
-  userList: fetchedUserList(userList)
-})
+const combinedReducers = {
+  name: 'user',
+  reducer: combineReducers({
+    userList: fetchedUserList(userList)
+  })
+}
+export default combinedReducers

@@ -10,6 +10,8 @@ import triggerFetch from './common/triggerFetch'
 export default async (location, context, store, modules) => {
   await triggerFetch(location, store)
 
+  console.log(store.getState())
+
   return {
     html: renderToString(<Loadable.Capture report={moduleName => {
       console.log(moduleName)
